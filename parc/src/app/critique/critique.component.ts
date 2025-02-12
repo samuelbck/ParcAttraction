@@ -5,11 +5,12 @@ import { CritiqueInterface } from '../Interface/critique.interface';
 import { AttractionInterface } from '../Interface/attraction.interface';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-critique',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule, FormsModule],
   templateUrl: './critique.component.html',
   styleUrls: ['./critique.component.scss']
 })
@@ -57,5 +58,7 @@ export class CritiqueComponent implements OnInit {
       },
       (error) => console.error('Erreur lors de l\'ajout', error)
     );
+    this.loadAttractions();
+    this.loadCritiques();
   }
 }

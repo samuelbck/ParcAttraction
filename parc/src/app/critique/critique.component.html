@@ -13,4 +13,33 @@
       <span>{{critique.texte}}</span>
     </div>
   </ng-container>
+
+
+  <form (ngSubmit)="onSubmit()" #critiqueForm="ngForm">
+    <div>
+      <label for="attractionId">Attraction :</label>
+      <select id="attractionId" [(ngModel)]="newCritique.attractionId" name="attractionId" required>
+        <option *ngFor="let attraction of attractions" [value]="attraction.attraction_id">
+          {{ attraction.nom }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label for="prenom">Prénom :</label>
+      <input id="prenom" [(ngModel)]="newCritique.prenom" name="prenom" type="text" required>
+    </div>
+    <div>
+      <label for="nom">Nom :</label>
+      <input id="nom" [(ngModel)]="newCritique.nom" name="nom" type="text" required>
+    </div>
+    <div>
+      <label for="texte">Critique :</label>
+      <textarea id="texte" [(ngModel)]="newCritique.texte" name="texte" required></textarea>
+    </div>
+    <div>
+      <label for="note">Note (sur 5) :</label>
+      <input id="note" [(ngModel)]="newCritique.note" name="note" type="number" min="1" max="5" required>
+    </div>
+    <button type="submit" [disabled]="!critiqueForm.form.valid">Ajouter une critique</button>
+  </form>
 </mat-card-content>
