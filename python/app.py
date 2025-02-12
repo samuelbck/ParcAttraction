@@ -4,7 +4,7 @@ from flask_cors import CORS
 import request.request as req
 import controller.auth.auth as user
 import controller.attraction as attraction
-import controller.critique as critique  # Import du contrôleur critique
+import controller.critique as critique
 
 app = Flask(__name__)
 CORS(app)
@@ -46,38 +46,17 @@ def deleteAttraction(index):
         return jsonify({"message": "Element supprimé."}), 200
     return jsonify({"message": "Erreur lors de la suppression."}), 500
 
-@app.post('/attraction/<int:attraction_id>/critique')
-def addCritique(attraction_id):
-    checkToken = user.check_token(request)
-    if checkToken != True:
-        return checkToken
-
-    json = request.get_json()
-    json['attractionId'] = attraction_id
-    retour = critique.add_critique(json)
-    if retour:
-        return jsonify({"message": "Critique ajoutée.", "result": retour}), 200
-    return jsonify({"message": "Erreur lors de l'ajout de la critique.", "result": retour}), 500
-
+# Critique 
 @app.get('/critiques')
 def getCritiquesAll():
     result = critique.get_critiques()
     return jsonify(result), 200
 
-@app.get('/attraction/<int:attraction_id>/critique')
-def getCritiques(attraction_id):
-    result = critique.get_critiques_by_attraction_id(attraction_id)
-    return jsonify(result), 200
-
-@app.delete('/attraction/<int:attraction_id>/critique/<int:critique_id>')
-def deleteCritique(attraction_id, critique_id):
-    checkToken = user.check_token(request)
-    if checkToken != True:
-        return checkToken
-
-    if critique.delete_critique(critique_id):
-        return jsonify({"message": "Critique supprimée."}), 200
-    return jsonify({"message": "Erreur lors de la suppression de la critique."}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.post('/critiques')
+def postCritique():
+    
+    json = request.get_json()
+    result = critique.add_critique(json)
+    if result:
+        return jsonify({"message": "Element ajouté.", "result": result}), 200
+    return jsonify({"message": "Erreur lors de l'ajout.", "result": result}), 500
