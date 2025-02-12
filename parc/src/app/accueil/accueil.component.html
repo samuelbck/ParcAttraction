@@ -8,6 +8,7 @@
         <span>Nom de l'attraction</span>
         <span>Description de l'attraction</span>
         <span>Difficulté de l'attraction / 5</span>
+        <span>Note moyenne de l'attraction / 5</span>
       </div>
     </div>
     <ng-container *ngFor="let attraction of attractions | async;">
@@ -15,6 +16,14 @@
         <span>{{attraction.nom}}</span>
         <span>{{attraction.description}}</span>
         <span>{{attraction.difficulte}} / 5</span>
+        <span>
+          <ng-container *ngFor="let star of getStars(moyenneNotes(attraction.attraction_id))">
+            <img *ngIf="star === 'full'" class="star" src="assets/etoile.png" alt="Full Star">
+            <img *ngIf="star === 'half'" class="star" src="assets/demi-etoile.png" alt="Half Star">
+            <img *ngIf="star === 'empty'" class="star" src="assets/etoile-vide.png" alt="Empty Star">
+          </ng-container>
+          ({{ moyenneNotes(attraction.attraction_id) }})
+        </span>
       </div>
     </ng-container>
   </mat-card-content>
