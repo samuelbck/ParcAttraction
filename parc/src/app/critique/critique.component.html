@@ -8,7 +8,7 @@
   </div>
   <ng-container *ngFor="let critique of critiques">
     <div class="critique"> <!-- *ngIf="attraction.visible == true" -->
-      <span>{{critique.attractionId}}</span>
+      <span>{{ getAttractionName(critique.attractionId) }}</span>
       <span>{{critique.prenom}} {{critique.nom}}</span>
       <span>{{critique.texte}}</span>
     </div>

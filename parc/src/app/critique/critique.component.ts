@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CritiqueService } from '../Service/critique.service';
+import { AttractionService } from '../Service/attraction.service';
 import { CritiqueInterface } from '../Interface/critique.interface';
+import { AttractionInterface } from '../Interface/attraction.interface';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 
@@ -13,12 +15,17 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class CritiqueComponent implements OnInit {
   critiques: CritiqueInterface[] = [];
+  attractions: AttractionInterface[] = [];
   newCritique: CritiqueInterface = { attractionId: 0, nom: '', prenom: '', texte: '', note: 1 };
 
-  constructor(private critiqueService: CritiqueService) {}
+  constructor(
+    private critiqueService: CritiqueService,
+    private attractionService: AttractionService
+  ) {}
 
   ngOnInit(): void {
     this.loadCritiques();
+    this.loadAttractions();
   }
 
   loadCritiques(): void {
@@ -26,6 +33,18 @@ export class CritiqueComponent implements OnInit {
       (data) => this.critiques = data,
       (error) => console.error('Erreur de chargement des critiques', error)
     );
+  }
+
+  loadAttractions(): void {
+    this.attractionService.getAllAttraction().subscribe(
+      (data) => this.attractions = data,
+      (error) => console.error('Erreur de chargement des attractions', error)
+    );
+  }
+
+  getAttractionName(attractionId: number): string {
+    const attraction = this.attractions.find(a => a.attraction_id === attractionId);
+    return attraction ? attraction.nom : 'Attraction inconnue';
   }
 
   onSubmit(): void {
