@@ -1,23 +1,68 @@
-.attraction-title {
-  font-size: 18px;
-  font-weight: 500;
-  background-color: darkgrey;
-  width: fit-content;
-  margin-top: 25px;
+.attraction-card {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #ececec;
 }
+
+.attraction-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  background: #d3d3d3;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #333;
+}
+
+.attraction-header span {
+  flex: 1;
+  text-align: center;
+}
+
 .attraction {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  column-gap: 25px;
-  width: fit-content;
+  background: #f0f0f0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
 
-  border-bottom: solid 1px grey;
-  span {
-    padding: 5px;
-    width: 250px;
-  }
+.attraction span {
+  flex: 1;
+  text-align: center;
+  padding: 5px 10px;
+  color: #444;
+}
+
+.attraction-name {
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.attraction-desc {
+  color: #555;
+}
+
+.attraction-difficulty {
+  font-weight: bold;
+  color: #c0392b;
+}
+
+.attraction-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  justify-content: center;
 }
 
 .star {
-  width: 20px;
+  width: 18px;
 }

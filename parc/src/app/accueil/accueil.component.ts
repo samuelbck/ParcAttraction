@@ -6,6 +6,7 @@ import { AttractionInterface } from '../Interface/attraction.interface';
 import { MatCardModule } from '@angular/material/card';
 import { CritiqueInterface } from '../Interface/critique.interface';
 import { CritiqueService } from '../Service/critique.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accueil',
@@ -21,7 +22,8 @@ export class AccueilComponent {
 
   constructor(
     private critiqueService: CritiqueService,
-    private attractionService: AttractionService
+    private attractionService: AttractionService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -77,5 +79,9 @@ export class AccueilComponent {
     }
 
     return stars;
+  }
+
+  navigateToCritique(attractionId: number | null) {
+    this.router.navigate(['/critique', attractionId]);
   }
 }
