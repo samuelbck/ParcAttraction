@@ -56,7 +56,7 @@ export class AccueilComponent {
       0
     );
   
-    return totalNotes / critiquesAttraction.length;
+    return parseFloat((totalNotes / critiquesAttraction.length).toFixed(2));
   }
 
   getStars(rating: number): any[] {
