@@ -24,4 +24,10 @@ export class AttractionService {
     const data = this.dataService.postData(url, attraction);
     return data as Observable<MessageInterface>;
   }
+
+  public getAttraction(id: number): Observable<AttractionInterface> {
+    const url = `http://127.0.0.1:5000/attraction/${id}`;
+    const data = this.dataService.getData(url);
+    return data as Observable<AttractionInterface>;
+  }
 }

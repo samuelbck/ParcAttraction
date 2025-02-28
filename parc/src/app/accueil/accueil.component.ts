@@ -30,7 +30,10 @@ export class AccueilComponent {
 
   loadCritiques(): void {
     this.critiqueService.getCritiques().subscribe(
-      (data) => this.critiques = data,
+      (data) => {
+        console.log('Données des critiques reçues :', data);
+        this.critiques = data;
+      },
       (error) => console.error('Erreur de chargement des critiques', error)
     );
   }

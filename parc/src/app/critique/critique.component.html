@@ -1,43 +1,43 @@
+<p>La note moyenne de cette attraction est de {{ moyenneNotes() }}</p>
+<p *ngIf="attraction">Test : {{ attraction.nom }}</p>
 <mat-card-content>
   <div class="critique-title">
     <div class="critique">
-      <span>Nom de l'attraction</span>
+      <span>Note</span>
       <span>Nom de l'auteur</span>
       <span>Critique</span>
     </div>
   </div>
   <ng-container *ngFor="let critique of critiques">
-    <div class="critique"> <!-- *ngIf="attraction.visible == true" -->
-      <span>{{ getAttractionName(critique.attractionId) }}</span>
-      <span>{{critique.prenom}} {{critique.nom}}</span>
-      <span>{{critique.texte}}</span>
+    <div class="critique">
+      <span>
+        <ng-container *ngFor="let star of getStars(critique.note)">
+          <img *ngIf="star === 'full'" class="star" src="assets/etoile.png" alt="Full Star">
+          <img *ngIf="star === 'half'" class="star" src="assets/demi-etoile.png" alt="Half Star">
+          <img *ngIf="star === 'empty'" class="star" src="assets/etoile-vide.png" alt="Empty Star">
+        </ng-container>
+         ({{ critique.note }})
+      </span>
+      <span>{{ critique.prenom }} {{ critique.nom }}</span>
+      <span>{{ critique.texte }}</span>
     </div>
   </ng-container>
 
-
   <form (ngSubmit)="onSubmit()" #critiqueForm="ngForm">
     <div>
-      <label for="attractionId">Attraction :</label>
-      <select id="attractionId" [(ngModel)]="newCritique.attractionId" name="attractionId" required>
-        <option *ngFor="let attraction of attractions" [value]="attraction.attraction_id">
-          {{ attraction.nom }}
-        </option>
-      </select>
-    </div>
-    <div>
-      <label for="prenom">Prénom :</label>
+      <label for="prenom">Prénom:</label>
       <input id="prenom" [(ngModel)]="newCritique.prenom" name="prenom" type="text" required>
     </div>
     <div>
-      <label for="nom">Nom :</label>
+      <label for="nom">Nom:</label>
       <input id="nom" [(ngModel)]="newCritique.nom" name="nom" type="text" required>
     </div>
     <div>
-      <label for="texte">Critique :</label>
+      <label for="texte">Critique:</label>
       <textarea id="texte" [(ngModel)]="newCritique.texte" name="texte" required></textarea>
     </div>
     <div>
-      <label for="note">Note (sur 5) :</label>
+      <label for="note">Note:</label>
       <input id="note" [(ngModel)]="newCritique.note" name="note" type="number" min="1" max="5" required>
     </div>
     <button type="submit" [disabled]="!critiqueForm.form.valid">Ajouter une critique</button>

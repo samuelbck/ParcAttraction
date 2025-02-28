@@ -35,5 +35,5 @@ export const routes: Routes = [
     },
     { path: '',   redirectTo: '/accueil', pathMatch: 'full' }, 
     { path: '', component: AccueilComponent },
-    { path: 'critique', component: CritiqueComponent },
+    { path: 'critique/:id', component: CritiqueComponent },
 ];
